@@ -1,9 +1,9 @@
 <?php
 require 'db.php';
 $id = $_GET['id'];
-$sql = 'SELECT * FROM products WHERE id_prod=:id';
+$sql = 'SELECT * FROM products WHERE id_prod='.$id;
 $stmt = $pdo->prepare($sql);
-$stmt->execute([':id' => $id ]);
+$stmt->execute([$id => $id ]);
 $products = $stmt->fetch(PDO::FETCH_OBJ);
 
 
@@ -15,17 +15,13 @@ if (isset ($_POST['name'])) {
     $photo = $_POST['photo'];
     $cat_id = $_POST['cat_id'];
 
-  $sql = 'UPDATE products SET name=:name, desc_p=:desc_p, price=:price, photo=:photo, cat_id=:cat_id WHERE id_prod=:id';
+  $sql = 'UPDATE products SET name='.$name.', desc_p='.$desc_p.', price='.$price.', photo='.$photo.', cat_id='.$cat_id.' WHERE id_prod='.$id;
     $stmt = $pdo->prepare($sql);
-  if ($stmt->execute([':name' => $name, ':desc_p' => $desc_p, ':price' => $price,':photo' => $photo,':cat_id' => $cat_id, ':id' => $id])) {
+  if ($stmt->execute([$name => $name, $desc_p => $desc_p, $price => $price, $photo, => $photo, $cat_id => $cat_id, $id => $id])) {
     header("Location: /");
   }
 
-
-
 }
-
-
  ?>
 <?php require 'header.php'; ?>
 

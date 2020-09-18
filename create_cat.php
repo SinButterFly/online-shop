@@ -4,9 +4,9 @@ $message = '';
 if (isset ($_POST['name_cat'])) {
     $name_cat = $_POST['name_cat'];
 
-    $sql = 'INSERT INTO categories (name_cat) VALUES(:name_cat)';
+    $sql = 'INSERT INTO categories (name_cat) VALUES('.$name_cat.')';
     $stmt = $pdo->prepare($sql);
-    if ($stmt->execute([':name_cat' => $name_cat])) {
+    if ($stmt->execute([$name_cat => $name_cat])) {
         $message = 'Категория добавлена';
     }
 }

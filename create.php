@@ -9,14 +9,13 @@ if (isset ($_POST['name'])) {
     $cat_id = $_POST['cat_id'];
 
   $sql = 'INSERT INTO products (name, desc_p, price, photo, cat_id)
-          VALUES(:name, :desc_p, :price, :photo, :cat_id)';
+          VALUES('.$name.', '.$desc_p.', '.$price.', '.$photo.', '.$cat_id.')';
   $stmt = $pdo->prepare($sql);
-  if ($stmt->execute([':name' => $name, ':desc_p' => $desc_p, ':price' => $price, ':photo' => $photo, ':cat_id' => $cat_id])) {
+  if ($stmt->execute([$name => $name, $desc_p => $desc_p, $price => $price, $photo => $photo, $cat_id => $cat_id])) {
     $message = 'Продукт добавлен';
   }
 
 }
-
 
  ?>
 <?php require 'header.php'; ?>
